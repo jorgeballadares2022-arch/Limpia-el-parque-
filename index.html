@@ -157,4 +157,12 @@ function typeName(t){return t==='plastic'?'plástico':t==='organic'?'residuos or
 let last=performance.now(),timer=0;function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(playing){let sp=4.1*dt,fx=Math.cos(p.a),fy=Math.sin(p.a),rx=-fy,ry=fx;let f=(keys.w?1:0)-(keys.s?1:0)-joy.y,s=(keys.d?1:0)-(keys.a?1:0)+joy.x;move((fx*f+rx*s)*sp,(fy*f+ry*s)*sp);time-=dt;if(time<=0){time=0;playing=false;endGame()}}render();update();requestAnimationFrame(loop)}
 function endGame(){document.getElementById('start').classList.remove('hide');document.querySelector('#start h1').textContent='¡Misión terminada!';document.querySelector('#start p').innerHTML='Puntuación final: <b>'+score+'</b><br>Recogiste '+trash.filter(x=>x.gone).length+' objetos. ¡Intenta superar tu récord!';document.getElementById('startBtn').textContent='JUGAR DE NUEVO'}
 function startGame(){trash.forEach(x=>x.gone=false);inv.plastic=inv.organic=inv.paper=inv.other=0;score=0;combo=1;bag=0;time=90;p.x=20;p.y=22;p.a=-Math.PI/2;p.pitch=0;playing=true;document.getElementById('start').classList.add('hide');update();toast('¡A limpiar! 🧹')}
-docume
+document.getElementById('startBtn').addEventListener('click',startGame);
+document.getElementById('pickup').addEventListener('click',pickup);
+document.getElementById('dump').addEventListener('click',dump);
+document.getElementById('info').addEventListener('click',()=>document.getElementById('panel').style.display='block');
+document.getElementById('close').addEventListener('click',()=>document.getElementById('panel').style.display='none');
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
